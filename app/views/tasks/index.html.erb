@@ -1,0 +1,31 @@
+<h1>Tasks for <%= @category.name %></h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Deadline</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tasks.each do |task| %>
+      <tr class="<%= 'completed' if task.completed %>">
+        <td><%= link_to task.name, [@category, task] %></td>
+        <td><%= task.deadline_date %> <%= task.deadline_time.strftime("%H:%M") %></td>
+        <td>
+          <%= link_to 'Edit', edit_category_task_path(@category, task) %>
+          <% if task.completed %>
+            <%= button_to 'Mark as Incomplete', mark_incomplete_category_task_path(@category, task), method: :patch, data: { confirm: 'Are you sure?' } %>
+          <% else %>
+            <%= button_to 'Mark as Complete', mark_complete_category_task_path(@category, task), method: :patch, data: { confirm: 'Are you sure?' } %>
+          <% end %>
+          <%= button_to 'Delete', [@category, task], method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'New Task', new_category_task_path(@category) %>
+<%= link_to 'Back to Categories', categories_path %>

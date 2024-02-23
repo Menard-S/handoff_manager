@@ -1,0 +1,17 @@
+<h1>Category: <%= @category.name %></h1>
+
+<p>
+  <strong>Billing Unit:</strong>
+  <%= @category.billing_unit %>
+</p>
+
+<p>
+  <strong>Pricing:</strong>
+  <%= @category.pricing %>
+</p>
+
+<%= link_to 'View Tasks', category_tasks_path(@category) %>
+
+<%= link_to 'Add New Task', new_category_task_path(@category) %> |
+<%= link_to 'Edit Category', edit_category_path(@category) %> |
+<%= link_to 'Back to Categories', categories_path %>

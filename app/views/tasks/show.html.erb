@@ -1,0 +1,34 @@
+<h1>Task: <%= @task.name %></h1>
+
+<p>
+  <strong>Deadline Date:</strong>
+  <%= @task.deadline_date %>
+</p>
+
+<p>
+  <strong>Deadline Time:</strong>
+  <%= @task.deadline_time.strftime("%H:%M") %>
+</p>
+
+<% if @category.billing_unit == 'HOURS' %>
+  <p>
+    <strong>Hours:</strong>
+    <%= @task.hours %>
+  </p>
+<% elsif @category.billing_unit == 'WORDS' %>
+  <p>
+    <strong>Word Count:</strong>
+    <%= display_word_counts(@task.word_counts) %>
+  </p>
+<% end %>
+
+<div>
+  Total Amount: $<span id="total_amount"><%= calculate_total_amount(@task) %></span>
+</div>
+
+<%= link_to 'Edit', edit_category_task_path(@category, @task) %> |
+<%= button_to 'Delete', category_task_path(@category, @task), 
+    method: :delete, 
+    data: { confirm: 'Are you sure?' }, 
+    class: 'delete-button' %> |
+<%= link_to 'Back to Tasks', category_tasks_path(@category) %>

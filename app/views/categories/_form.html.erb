@@ -1,0 +1,45 @@
+<%= form_with(model: category, local: true, html: { "data-turbolinks-cache" => "false" }) do |form| %>
+  <% if category.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(category.errors.count, "error") %> prohibited this category from being saved:</h2>
+
+      <ul>
+        <% category.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :category_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :billing_unit %>
+    <%= form.select :billing_unit, ['HOURS', 'WORDS'], id: :category_billing_unit %>
+  </div>
+
+  <div id="hours_pricing" style="display: none;">
+    <%= form.label :hourly_rate, "Hourly Rate" %>
+    <%= form.number_field :hourly_rate, name: 'hourly_rate'  %>
+  </div>
+
+  <div id="words_pricing" style="display: none;">
+    <%= form.label :new_word, "New Word Price" %>
+    <%= form.number_field :new_word, name: 'new_word', step: :any, value: 0 %>
+    <%= form.label :fuzzy_75_84, "75-84% Match Price" %>
+    <%= form.number_field :fuzzy_75_84, name: 'fuzzy_75_84', step: :any, value: 0 %>
+    <%= form.label :fuzzy_85_94, "85-94% Match Price" %>
+    <%= form.number_field :fuzzy_85_94, name: 'fuzzy_85_94', step: :any, value: 0 %>
+    <%= form.label :fuzzy_95_99, "95-99% Match Price" %>
+    <%= form.number_field :fuzzy_95_99, name: 'fuzzy_95_99', step: :any, value: 0 %>
+    <%= form.label :leveraged_match, "Leveraged Match Price" %>
+    <%= form.number_field :leveraged_match, name: 'leveraged_match', step: :any, value: 0 %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

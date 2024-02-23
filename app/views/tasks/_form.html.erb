@@ -1,0 +1,72 @@
+<% pricing_data = @category.billing_unit == 'WORDS' ? @category.pricing : {} %>
+
+<div id="task_form" 
+     <% if @category.billing_unit == 'HOURS' %>
+         data-hourly-rate="<%= @category.pricing['hourly'] %>"
+     <% else %>
+         data-new-word-rate="<%= pricing_data['new_word'] %>"
+         data-fuzzy-75-84-rate="<%= pricing_data['fuzzy_75_84'] %>"
+         data-fuzzy-85-94-rate="<%= pricing_data['fuzzy_85_94'] %>"
+         data-fuzzy-95-99-rate="<%= pricing_data['fuzzy_95_99'] %>"
+         data-leveraged-match-rate="<%= pricing_data['leveraged_match'] %>"
+     <% end %>>
+  
+  <%= form_with(model: [ @category, @task ], local: true) do |form| %>
+      <% if @task.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
+
+          <ul>
+            <% @task.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="field">
+        <%= form.label :name %>
+        <%= form.text_field :name, id: :task_name %>
+      </div>
+
+      <div class="field">
+        <%= form.label :deadline_date %>
+        <%= form.date_field :deadline_date, id: :task_deadline_date %>
+      </div>
+
+      <div class="field">
+        <%= form.label :deadline_time %>
+        <%= form.time_field :deadline_time, id: :task_deadline_time %>
+      </div>
+
+      <% if @category.billing_unit == 'HOURS' %>
+        <div id="hours_quantity">
+          <%= form.label :hours %>
+          <%= form.number_field :hours, step: :any %>
+        </div>
+        <% elsif @category.billing_unit == 'WORDS' %>
+          <div id="words_quantity">
+            <%= form.label :word_counts_new_word, "New Word Words" %>
+            <%= number_field_tag 'task[word_counts][new_word]', nil, step: :any, value: 0, id: :task_word_counts_new_word, class: 'form-control' %>
+
+            <%= form.label :word_counts_fuzzy_75_84, "75-84% Match Words" %>
+            <%= number_field_tag 'task[word_counts][fuzzy_75_84]', nil, step: :any, value: 0, id: :task_word_counts_fuzzy_75_84, class: 'form-control' %>
+
+            <%= form.label :word_counts_fuzzy_85_94, "85-94% Match Words" %>
+            <%= number_field_tag 'task[word_counts][fuzzy_85_94]', nil, step: :any, value: 0, id: :task_word_counts_fuzzy_85_94, class: 'form-control' %>
+
+            <%= form.label :word_counts_fuzzy_95_99, "95-99% Match Words" %>
+            <%= number_field_tag 'task[word_counts][fuzzy_95_99]', nil, step: :any, value: 0, id: :task_word_counts_fuzzy_95_99, class: 'form-control' %>
+
+            <%= form.label :word_counts_leveraged_match, "Leveraged Match Words" %>
+            <%= number_field_tag 'task[word_counts][leveraged_match]', nil, step: :any, value: 0, id: :task_word_counts_leveraged_match, class: 'form-control' %>
+          </div>
+        <% end %>
+
+
+      <div class="actions">
+        <%= form.submit %>
+      </div>
+  <% end %>
+
+</div>
