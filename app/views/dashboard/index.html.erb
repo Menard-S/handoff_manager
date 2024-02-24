@@ -1,0 +1,38 @@
+<%= form_tag(dashboard_path, method: :get) do %>
+  <%= date_field_tag :start_date, params[:start_date] %>
+  <%= date_field_tag :end_date, params[:end_date] %>
+  <%= submit_tag 'Filter' %>
+<% end %>
+
+<%= link_to 'Reset Filters', dashboard_path, class: 'btn btn-secondary' %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Deadline Date</th>
+      <th>Deadline Time</th>
+      <th>Category Name</th>
+      <th>Billing Unit</th>
+      <th>Price</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tasks.each do |task| %>
+      <tr class="<%= 'completed' if task.completed %>">
+        <td><%= link_to task.name, category_task_path(task.category, task) %></td>
+        <td><%= task.deadline_date %></td>
+        <td><%= task.deadline_time %></td>
+        <td><%= task.category_name %></td>
+        <td><%= task.billing_unit %></td>
+        <td>$<%= calculate_total_amount(task) %></td>
+        <td>
+          <%= link_to 'Edit', edit_category_task_path(task.category, task) %>
+          <%= link_to 'Delete', [task.category, task], method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= button_to 'Mark as Complete', mark_complete_category_task_path(task.category, task), method: :patch, data: { confirm: 'Are you sure?' }, class: 'mark-as-complete-button' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -51,22 +51,14 @@ class TasksController < ApplicationController
       is_completed = @task.completed?
       if @task.update(completed: !is_completed)
         notice_message = is_completed ? 'Task was marked as incomplete.' : 'Task was marked as complete.'
-        redirect_to category_tasks_path(@category), notice: notice_message
+        
+        # Determine if the request came from the dashboard
+        redirect_back(fallback_location: category_tasks_path(@category), notice: notice_message)
       else
-        redirect_to category_tasks_path(@category), alert: 'Unable to update task.'
+        redirect_back(fallback_location: category_tasks_path(@category), alert: 'Unable to update task.')
       end
-    end
-
-    def mark_incomplete
-      @task = @category.tasks.find(params[:id])
-      if @task.update(completed: false)
-        redirect_to category_tasks_path(@category), notice: 'Task was marked as incomplete.'
-      else
-        redirect_to category_tasks_path(@category),
-    alert: 'Unable to mark task as incomplete.'
-      end
-    end
-  
+    end    
+    
     private
   
     def set_category
