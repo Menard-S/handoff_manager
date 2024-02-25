@@ -1,8 +1,8 @@
 require_relative "boot"
 
 require "rails/all"
-require 'devise/orm/active_record'
-require 'orm_adapter'
+# require 'devise/orm/active_record'
+# require 'orm_adapter'
 
 
 

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users
+  # devise_for :users
   get '/dashboard', to: 'dashboard#index'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -8,7 +8,13 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   # You can define the root route if you have a controller and action to handle it
-  # root "dashboard#index"
+  root "registrations#new"
+  get 'sign_up', to: 'registrations#new', as: :sign_up
+  post 'sign_up', to: 'registrations#create'
+  delete 'logout', to: "sessions#destroy"
+
+  get 'sign_in', to: 'sessions#new', as: :sign_in
+  post 'sign_in', to: 'sessions#create'
 
   # Routes for categories
   resources :categories do

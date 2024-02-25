@@ -17,7 +17,7 @@
         <td><%= category.billing_unit %></td>
         <td>
           <%= link_to 'Edit', edit_category_path(category) %>
-          <%= button_to 'Delete', category, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= button_to 'Delete', category, method: :delete, data: { confirm: 'Deleting this category will also delete all associated tasks. Are you sure you want to proceed?', turbo: false } %>
         </td>
       </tr>
     <% end %>

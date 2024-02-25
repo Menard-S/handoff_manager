@@ -40,9 +40,22 @@ class CategoriesController < ApplicationController
   
     # DELETE /categories/:id
     def destroy
-      @category.destroy
-      redirect_to categories_url, notice: 'Category was successfully destroyed.'
+      category = Category.find(params[:id])
+      
+      # Check if the category has any associated tasks
+      if category.tasks.any?
+        # If there are tasks, inform the user that they will be deleted
+        # You can use a JavaScript confirm dialog for this, or a custom confirmation page/view
+        message = "Deleting this category will also delete all associated tasks. Are you sure you want to proceed?"
+        redirect_to categories_path, alert: message
+      else
+        # If there are no tasks, proceed with deletion
+        category.destroy
+        redirect_to categories_path, notice: 'Category was successfully deleted.'
+      end
     end
+    
+    
   
     private
   
@@ -62,11 +75,11 @@ class CategoriesController < ApplicationController
                            { pricing: { hourly: params[:hourly_rate].to_f } }
                          when 'WORDS'
                            { pricing: {
-                               new: params[:new_word].to_f,
+                               new_word: params[:new_word].to_f,
                                fuzzy_75_84: params[:fuzzy_75_84].to_f,
                                fuzzy_85_94: params[:fuzzy_85_94].to_f,
                                fuzzy_95_99: params[:fuzzy_95_99].to_f,
-                               leveraged: params[:leveraged_match].to_f
+                               leveraged_match: params[:leveraged_match].to_f
                              } }
                          else
                            { pricing: nil }

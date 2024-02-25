@@ -4,7 +4,12 @@
   <%= submit_tag 'Filter' %>
 <% end %>
 
-<%= link_to 'Reset Filters', dashboard_path, class: 'btn btn-secondary' %>
+<%= link_to 'Reset Filters', dashboard_path(reset: true), class: 'btn btn-secondary' %>
+
+<% if @user %>
+  Welcome, <%= @user.email %>
+  <%= button_to "Logout", logout_path, method: :delete %>
+<% end %>
 
 <table>
   <thead>
@@ -29,8 +34,11 @@
         <td>$<%= calculate_total_amount(task) %></td>
         <td>
           <%= link_to 'Edit', edit_category_task_path(task.category, task) %>
-          <%= link_to 'Delete', [task.category, task], method: :delete, data: { confirm: 'Are you sure?' } %>
-          <%= button_to 'Mark as Complete', mark_complete_category_task_path(task.category, task), method: :patch, data: { confirm: 'Are you sure?' }, class: 'mark-as-complete-button' %>
+          <%= button_to 'Delete', [task.category, task], method: :delete, params: { from_dashboard: true }, data: { confirm: 'Are you sure?', turbo: false  } %>
+     <%= button_to task.completed ? 'Mark as Incomplete' : 'Mark as Complete', 
+                    mark_complete_category_task_path(task.category, task), 
+                    method: :patch, 
+                    data: { confirm: 'Are you sure?', turbo: false  }, class: 'mark-as-complete-button' %>
         </td>
       </tr>
     <% end %>

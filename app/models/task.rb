@@ -1,5 +1,8 @@
 class Task < ApplicationRecord
   belongs_to :category
+  delegate :name, to: :category, prefix: true, allow_nil: true
+  delegate :billing_unit, to: :category, allow_nil: true
+
   
   # Ensure that the name is present
   validates :name, presence: true
@@ -7,6 +10,9 @@ class Task < ApplicationRecord
   # Validate presence of deadline_date and deadline_time
   validates :deadline_date, presence: true
   validates :deadline_time, presence: true
+
+  validate :deadline_date_cannot_be_in_the_past
+  validate :deadline_time_cannot_be_in_the_past, if: -> { deadline_date.present? && deadline_time.present? }
   
   # Conditional validations based on the associated category's billing unit
   with_options if: -> { category.billing_unit == 'HOURS' } do |task|
@@ -31,4 +37,23 @@ class Task < ApplicationRecord
   # Scope to get incomplete tasks
   scope :incomplete, -> { where(completed: [nil, false]) }
   
+  private
+
+  def deadline_date_cannot_be_in_the_past
+    if deadline_date.present? && deadline_date < Date.current
+      errors.add(:deadline_date, "can't be in the past")
+    end
+  end
+
+  def deadline_time_cannot_be_in_the_past
+    # Only perform this validation if the deadline date is today
+    return unless deadline_date == Date.current
+    
+    # Convert deadline_time to a DateTime object for comparison
+    deadline_datetime = DateTime.parse("#{deadline_date} #{deadline_time}")
+    
+    if deadline_datetime < DateTime.current
+      errors.add(:deadline_time, "can't be in the past for today's date")
+    end
+  end
 end

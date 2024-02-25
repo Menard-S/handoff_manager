@@ -9,11 +9,19 @@ module TasksHelper
       when 'HOURS'
         task.hours.to_f * task.category.pricing['hourly'].to_f
       when 'WORDS'
-        # Assuming word_counts is a hash like { "new_word" => 100, "fuzzy_75_84" => 50, ... }
-        task.word_counts.sum { |key, count| count.to_f * task.category.pricing[key].to_f }
+        total = task.word_counts.sum do |key, count|
+          rate = task.category.pricing[key].to_f
+          amount = count.to_f * rate
+          puts "#{key}: #{count} * #{rate} = #{amount}" # Corrected debugging statement
+          amount
+        end
+        puts "Total: #{total}" # For debugging
+        total.round(2)
+      
       else
         0
-      end.round(2) # Rounds the result to 2 decimal places
+      end
     end
+    
   end
   

@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
     before_action :set_category
-    before_action :set_task, only: [:show, :edit, :update, :destroy]
+    before_action :set_task, except: [:new, :create, :index]
   
     # GET /categories/:category_id/tasks
     def index
@@ -9,14 +9,15 @@ class TasksController < ApplicationController
   
     # GET /categories/:category_id/tasks/new
     def new
-      @task = @category.tasks.build
+      @task = Task.new
     end
   
     # POST /categories/:category_id/tasks
     def create
+      params[:task][:deadline_time] = in_time_zone(params[:task][:deadline_time])
       @task = @category.tasks.build(task_params)
       if @task.save
-        redirect_to category_tasks_path(@category), notice: 'Task was successfully created.'
+        redirect_to [@category, @task], notice: 'Task was successfully created.'
       else
         render :new
       end
@@ -32,7 +33,10 @@ class TasksController < ApplicationController
   
     # PATCH/PUT /categories/:category_id/tasks/:id
     def update
-      if @task.update(task_params)
+      @task.assign_attributes(task_params)
+    
+      if @task.valid?
+        @task.save
         redirect_to [@category, @task], notice: 'Task was successfully updated.'
       else
         render :edit
@@ -41,8 +45,14 @@ class TasksController < ApplicationController
   
     # DELETE /categories/:category_id/tasks/:id
     def destroy
+      @task = Task.find(params[:id])
       @task.destroy
-      redirect_to category_tasks_url(@category), notice: 'Task was successfully destroyed.'
+  
+      if params[:from_dashboard]
+        redirect_to dashboard_path, notice: 'Task was successfully deleted.'
+      else
+        redirect_to categories_path, notice: 'Task was successfully deleted.'
+      end
     end
 
     
@@ -60,6 +70,11 @@ class TasksController < ApplicationController
     end    
     
     private
+
+    def in_time_zone(time_string)
+      # Parse the time string in the Asia/Manila time zone and return as UTC
+      ActiveSupport::TimeZone['Asia/Manila'].parse(time_string).utc if time_string.present?
+    end
   
     def set_category
       @category = Category.find(params[:category_id])
@@ -70,14 +85,18 @@ class TasksController < ApplicationController
     end
   
     def task_params
-      params.require(:task).permit(
-        :name,
-        :deadline_date,
-        :deadline_time,
-        :hours,
-        word_counts: [:new_word, :fuzzy_75_84, :fuzzy_85_94, :fuzzy_95_99, :leveraged_match]
-      )
-    end    
-    
+      permitted_params = [:name, :deadline_date, :deadline_time]
+      
+      billing_unit = @category.billing_unit
+      
+      case billing_unit
+      when 'HOURS'
+        permitted_params << :hours
+      when 'WORDS'
+        permitted_params << { word_counts: [:new_word, :fuzzy_75_84, :fuzzy_85_94, :fuzzy_95_99, :leveraged_match] }
+      end
+      
+      params.require(:task).permit(*permitted_params)
+    end
 end
   

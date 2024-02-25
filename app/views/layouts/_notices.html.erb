@@ -1,0 +1,7 @@
+<div id="flash">
+  <% flash.each do |msg_type, message| %>
+    <%= render partial: "shared/flash", locals: { msg_type: msg_type, message: message } %>
+  <% end %>
+</div>
+<%= turbo_stream.update "flash", partial: "shared/flash", locals: { msg_type: :notice, message: "your message" } %> 
+// msg_type: :notice, :alert, :error, :success
