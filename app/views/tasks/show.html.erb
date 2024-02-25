@@ -1,38 +1,42 @@
-<h1>Task: <%= @task.name %></h1>
+<div class="task-container" style="max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); background: #fff;">
+  <h1 style="text-align: center;">
+    Task: <%= @task.name %>
+    <%= link_to edit_category_task_path(@category, @task), class: 'float-right' do %>
+      <i class="fas fa-edit"></i>
+    <% end %>
+  </h1>
 
-<p>
-  <strong>Deadline Date:</strong>
-  <%= @task.deadline_date %>
-</p>
-
-<p>
-  <strong>Deadline Time:</strong>
-  <%= @task.deadline_time.strftime("%H:%M") %>
-</p>
-
-<% if @category.billing_unit == 'HOURS' %>
-  <p>
-    <strong>Hours:</strong>
-    <%= @task.hours %>
+  <p style="text-align: center;">
+    <strong>Deadline Date:</strong>
+    <%= @task.deadline_date %>
   </p>
-<% elsif @category.billing_unit == 'WORDS' %>
-  <p>
-    <strong>Word Count:</strong>
-    <%= display_word_counts(@task.word_counts) %>
-  </p>
-<% end %>
 
-<div>
-  Total Amount: $<span id="total_amount"><%= calculate_total_amount(@task) %></span>
+  <p style="text-align: center;">
+    <strong>Deadline Time:</strong>
+    <%= @task.deadline_time.strftime("%H:%M") %>
+  </p>
+
+  <% if @category.billing_unit == 'HOURS' %>
+    <p style="text-align: center;">
+      <strong>Hours:</strong>
+      <%= @task.hours %>
+    </p>
+  <% elsif @category.billing_unit == 'WORDS' %>
+    <p style="text-align: center;">
+      <strong>Word Count:</strong>
+      <ul style="list-style-type: none;">
+        <%= display_word_counts(@task.word_counts) %>
+      </ul>
+    </p>
+  <% end %>
+
+  <div style="text-align: center;">
+    <strong>Total Amount:</strong> $<span id="total_amount"><%= calculate_total_amount(@task) %></span>
+  </div>
+
+  <div style="text-align: center; margin-top: 20px;">
+    <%= link_to category_tasks_path(@category), class: 'btn btn-view-tasks', onmouseover: "this.style.boxShadow='0 2px 4px #666';", onmouseout: "this.style.boxShadow='none';" do %>
+      <i class="fas fa-arrow-left" style="color: #007bff;"></i> View all tasks in <%= @category.name %>
+    <% end %>
+  </div>
 </div>
-
-<%= link_to 'Edit', edit_category_task_path(@category, @task) %> |
-<%
-=begin%>
- <%= button_to 'Delete', category_task_path(@category, @task), 
-    method: :delete, 
-    data: { confirm: 'Are you sure?' }, 
-    class: 'delete-button' %> | 
-<%
-=end%>
-<%= link_to 'Back to Tasks', category_tasks_path(@category) %>

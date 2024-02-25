@@ -47,27 +47,33 @@ class TasksController < ApplicationController
     def destroy
       @task = Task.find(params[:id])
       @task.destroy
-  
+    
       if params[:from_dashboard]
         redirect_to dashboard_path, notice: 'Task was successfully deleted.'
+      elsif params[:from_task]
+        redirect_to category_tasks_path(@category), notice: 'Task was successfully deleted.'
       else
         redirect_to categories_path, notice: 'Task was successfully deleted.'
       end
     end
+    
 
     
     def mark_complete
       @task = @category.tasks.find(params[:id])
       is_completed = @task.completed?
+      
+      # Attempt to update the task's completion status.
       if @task.update(completed: !is_completed)
         notice_message = is_completed ? 'Task was marked as incomplete.' : 'Task was marked as complete.'
-        
-        # Determine if the request came from the dashboard
         redirect_back(fallback_location: category_tasks_path(@category), notice: notice_message)
       else
-        redirect_back(fallback_location: category_tasks_path(@category), alert: 'Unable to update task.')
+        # If update fails, send back the error messages.
+        alert_message = @task.errors.full_messages.to_sentence
+        redirect_back(fallback_location: category_tasks_path(@category), alert: alert_message)
       end
-    end    
+    end
+      
     
     private
 

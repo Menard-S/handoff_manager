@@ -3,7 +3,7 @@ class CategoriesController < ApplicationController
   
     # GET /categories
     def index
-      @categories = Category.all
+      @categories = Category.order(:name)
     end
   
     # GET /categories/new
@@ -40,17 +40,14 @@ class CategoriesController < ApplicationController
   
     # DELETE /categories/:id
     def destroy
-      category = Category.find(params[:id])
+
       
       # Check if the category has any associated tasks
-      if category.tasks.any?
-        # If there are tasks, inform the user that they will be deleted
-        # You can use a JavaScript confirm dialog for this, or a custom confirmation page/view
-        message = "Deleting this category will also delete all associated tasks. Are you sure you want to proceed?"
+      if @category.tasks.any?
+        message = "This category has pending task(s). Empty the category first!"
         redirect_to categories_path, alert: message
       else
-        # If there are no tasks, proceed with deletion
-        category.destroy
+        @category.destroy
         redirect_to categories_path, notice: 'Category was successfully deleted.'
       end
     end

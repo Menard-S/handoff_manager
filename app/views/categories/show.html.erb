@@ -1,17 +1,35 @@
-<h1>Category: <%= @category.name %></h1>
+<div class="category-show-container">
+  <h1>
+    Category: <%= @category.name %>
+    <%= link_to edit_category_path(@category), class: 'fa-icon fa-edit-header' do %>
+      <i class="fas fa-edit"></i>
+    <% end %>
+  </h1>
 
-<p>
-  <strong>Billing Unit:</strong>
-  <%= @category.billing_unit %>
-</p>
+  <p>
+    <strong>Billing Unit:</strong>
+    <%= @category.billing_unit %>
+  </p>
 
-<p>
-  <strong>Pricing:</strong>
-  <%= @category.pricing %>
-</p>
+  <p>
+    <strong>Pricing:</strong>
+    <ul>
+      <% @category.pricing.each do |key, value| %>
+        <li><%= key.humanize %>: <%= value %></li>
+      <% end %>
+    </ul>
+  </p>
 
-<%= link_to 'View Tasks', category_tasks_path(@category) %>
+<div>
+<%= link_to categories_path, class: 'btn btn-back', onmouseover: "this.style.boxShadow='0 2px 4px #666';", onmouseout: "this.style.boxShadow='none';" do %>
+  <i class="fas fa-arrow-left" style="color: #007bff;"></i> Back to all categories
+<% end %>
+<%= link_to new_category_task_path(@category), class: 'btn btn-new-task', onmouseover: "this.style.boxShadow='0 2px 4px #666';", onmouseout: "this.style.boxShadow='none';" do %>
+  <i class="fas fa-plus" style="color: #28a745;"></i> Add New Task
+<% end %>
+<%= link_to category_tasks_path(@category), class: 'btn btn-view-tasks', onmouseover: "this.style.boxShadow='0 2px 4px #666';", onmouseout: "this.style.boxShadow='none';" do %>
+  <i class="fas fa-arrow-right" style="color: #007bff;"></i> View all tasks in <%= @category.name %>
+<% end %>
 
-<%= link_to 'Add New Task', new_category_task_path(@category) %> |
-<%= link_to 'Edit Category', edit_category_path(@category) %> |
-<%= link_to 'Back to Categories', categories_path %>
+
+</div>

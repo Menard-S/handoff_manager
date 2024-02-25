@@ -1,21 +1,22 @@
 <header class="d-flex justify-content-between align-items-center p-3 bg-light">
   <div>
-    <% if @user %>
-      Welcome, <%= @user.email %>
-    <% end %>
-  </div>
+
   
-  <div>
+  <%
+=begin%>
+ <div>
     <%= button_to "Logout", logout_path, method: :delete, class: "btn btn-danger" %>
-  </div>
+  </div> 
+<%
+=end%>
 </header>
 
 <div class="d-flex justify-content-between align-items-center py-2">
+  <% if @user %>
+    <div>Welcome to your dashboard, <%= @user.email %>!</div>
+  <% end %>
   <div>
-    <%= link_to 'Go to Categories', categories_path, class: 'btn btn-info' %>
-  </div>
-  <div class="d-flex">
-    <%= form_tag(dashboard_path, method: :get, class: "d-flex") do %>
+    <%= form_tag(dashboard_path, method: :get, class: "d-flex justify-content-end") do %>
       <%= date_field_tag :start_date, params[:start_date], class: "me-2" %>
       <%= date_field_tag :end_date, params[:end_date], class: "me-2" %>
       <%= submit_tag 'Filter', class: "btn btn-primary me-2" %>
@@ -25,10 +26,11 @@
 </div>
 
 
+
 <table class="table w-100">
   <thead>
     <tr>
-      <th>Name</th>
+      <th>Task Name</th>
       <th>Deadline Date</th>
       <th>Deadline Time</th>
       <th>Category Name</th>
@@ -43,7 +45,7 @@
       <td><%= link_to category_task_path(task.category, task) do %><%= task.name %><% end %></td>
       <td><%= task.deadline_date %></td>
       <td><%= task.deadline_time %></td>
-      <td><%= task.category_name %></td>
+      <td><%= link_to category_path(task.category) do %><%= task.category_name %><% end %></td>
       <td><%= task.billing_unit %></td>
       <td>$<%= calculate_total_amount(task) %></td>
         <td>

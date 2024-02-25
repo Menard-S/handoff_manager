@@ -12,7 +12,8 @@ class Task < ApplicationRecord
   validates :deadline_time, presence: true
 
   validate :deadline_date_cannot_be_in_the_past
-  validate :deadline_time_cannot_be_in_the_past, if: -> { deadline_date.present? && deadline_time.present? }
+  validate :deadline_time_cannot_be_in_the_past, if: -> { deadline_date.present? && deadline_time.present? },
+            unless: -> { only_completed_status_being_updated? }
   
   # Conditional validations based on the associated category's billing unit
   with_options if: -> { category.billing_unit == 'HOURS' } do |task|
@@ -44,7 +45,12 @@ class Task < ApplicationRecord
       errors.add(:deadline_date, "can't be in the past")
     end
   end
-
+  
+  def only_completed_status_being_updated?
+    # Checks if the only attribute being changed is the 'completed' attribute
+    changes.keys == ['completed']
+  end
+  
   def deadline_time_cannot_be_in_the_past
     # Only perform this validation if the deadline date is today
     return unless deadline_date == Date.current
