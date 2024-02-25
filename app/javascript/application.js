@@ -1,6 +1,7 @@
 // Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
 import "@hotwired/turbo-rails"
 import "controllers"
+import 'bootstrap';
 
 document.addEventListener("turbo:load", function() {
     var billingUnitSelect = document.getElementById('category_billing_unit');
@@ -41,4 +42,13 @@ document.addEventListener("turbo:load", function() {
   
     // Call the function to set the correct display on load
     togglePricingFields();
+  });
+
+  document.addEventListener("turbo:load", function() {
+    setTimeout(function() {
+      document.querySelectorAll('.alert').forEach(function(alert) {
+        alert.style.display = 'none';
+      });
+    }, 6000);
+
   });

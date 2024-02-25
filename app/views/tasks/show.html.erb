@@ -27,8 +27,12 @@
 </div>
 
 <%= link_to 'Edit', edit_category_task_path(@category, @task) %> |
-<%= button_to 'Delete', category_task_path(@category, @task), 
+<%
+=begin%>
+ <%= button_to 'Delete', category_task_path(@category, @task), 
     method: :delete, 
     data: { confirm: 'Are you sure?' }, 
-    class: 'delete-button' %> |
+    class: 'delete-button' %> | 
+<%
+=end%>
 <%= link_to 'Back to Tasks', category_tasks_path(@category) %>

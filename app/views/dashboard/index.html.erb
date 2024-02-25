@@ -1,17 +1,31 @@
-<%= form_tag(dashboard_path, method: :get) do %>
-  <%= date_field_tag :start_date, params[:start_date] %>
-  <%= date_field_tag :end_date, params[:end_date] %>
-  <%= submit_tag 'Filter' %>
-<% end %>
+<header class="d-flex justify-content-between align-items-center p-3 bg-light">
+  <div>
+    <% if @user %>
+      Welcome, <%= @user.email %>
+    <% end %>
+  </div>
+  
+  <div>
+    <%= button_to "Logout", logout_path, method: :delete, class: "btn btn-danger" %>
+  </div>
+</header>
 
-<%= link_to 'Reset Filters', dashboard_path(reset: true), class: 'btn btn-secondary' %>
+<div class="d-flex justify-content-between align-items-center py-2">
+  <div>
+    <%= link_to 'Go to Categories', categories_path, class: 'btn btn-info' %>
+  </div>
+  <div class="d-flex">
+    <%= form_tag(dashboard_path, method: :get, class: "d-flex") do %>
+      <%= date_field_tag :start_date, params[:start_date], class: "me-2" %>
+      <%= date_field_tag :end_date, params[:end_date], class: "me-2" %>
+      <%= submit_tag 'Filter', class: "btn btn-primary me-2" %>
+      <%= link_to 'Reset Filters', dashboard_path(reset: true), class: 'btn btn-secondary' %>
+    <% end %>
+  </div>
+</div>
 
-<% if @user %>
-  Welcome, <%= @user.email %>
-  <%= button_to "Logout", logout_path, method: :delete %>
-<% end %>
 
-<table>
+<table class="table w-100">
   <thead>
     <tr>
       <th>Name</th>
@@ -23,24 +37,35 @@
       <th>Actions</th>
     </tr>
   </thead>
-  <tbody>
-    <% @tasks.each do |task| %>
-      <tr class="<%= 'completed' if task.completed %>">
-        <td><%= link_to task.name, category_task_path(task.category, task) %></td>
-        <td><%= task.deadline_date %></td>
-        <td><%= task.deadline_time %></td>
-        <td><%= task.category_name %></td>
-        <td><%= task.billing_unit %></td>
-        <td>$<%= calculate_total_amount(task) %></td>
+<tbody>
+  <% @tasks.each do |task| %>
+    <tr class="<%= 'table-success' if task.completed %>">
+      <td><%= link_to category_task_path(task.category, task) do %><%= task.name %><% end %></td>
+      <td><%= task.deadline_date %></td>
+      <td><%= task.deadline_time %></td>
+      <td><%= task.category_name %></td>
+      <td><%= task.billing_unit %></td>
+      <td>$<%= calculate_total_amount(task) %></td>
         <td>
-          <%= link_to 'Edit', edit_category_task_path(task.category, task) %>
-          <%= button_to 'Delete', [task.category, task], method: :delete, params: { from_dashboard: true }, data: { confirm: 'Are you sure?', turbo: false  } %>
-     <%= button_to task.completed ? 'Mark as Incomplete' : 'Mark as Complete', 
-                    mark_complete_category_task_path(task.category, task), 
-                    method: :patch, 
-                    data: { confirm: 'Are you sure?', turbo: false  }, class: 'mark-as-complete-button' %>
+          <div class="d-flex justify-content-around">
+            <%= button_to mark_complete_category_task_path(task.category, task), method: :patch, class: "btn btn-sm btn-outline-success", data: { turbo: false } do %>
+              <i class="fas fa-<%= task.completed ? 'undo' : 'check' %>"></i>
+            <% end %>
+            <%= link_to edit_category_task_path(task.category, task), class: "btn btn-sm btn-outline-primary" do %>
+              <i class="fas fa-edit"></i>
+            <% end %>                        
+            <%= button_to [task.category, task], 
+                          method: :delete, 
+                          params: { from_dashboard: true }, 
+                          data: { confirm: 'Are you sure?' }, 
+                          class: "btn btn-sm btn-outline-danger btn-delete",
+                          disabled: !task.completed do %>
+              <i class="fas fa-trash-alt"></i>
+            <% end %>
+
+          </div>
         </td>
-      </tr>
-    <% end %>
-  </tbody>
+    </tr>
+  <% end %>
+</tbody>
 </table>
