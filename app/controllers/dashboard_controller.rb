@@ -1,12 +1,18 @@
 class DashboardController < ApplicationController
   def index
-    # Check for a reset parameter or lack of date parameters to display all tasks
-    if params[:reset] || (!params.key?(:start_date) && !params.key?(:end_date))
-      @tasks = Task.all # Or however you initially retrieve tasks without filtering
+    service = DashboardService.new(params[:start_date], params[:end_date])
+
+    if params[:reset] || params[:start_date].blank? || params[:end_date].blank?
+  
+      @tasks = Task.order(:deadline_date, :deadline_time)
+      @completed_tasks_count = Task.where(completed: true).count
     else
-      start_date = params[:start_date].present? ? params[:start_date] : Date.today.beginning_of_month
-      end_date = params[:end_date].present? ? params[:end_date] : Date.today.end_of_month
-      @tasks = DashboardService.new(start_date, end_date).call
+      @tasks = service.call
+      @completed_tasks_count = service.count_completed
     end
+
+    @categories = Category.all
+    @total_tasks_count = service.tasks_count
+
   end
 end

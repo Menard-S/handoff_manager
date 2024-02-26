@@ -15,29 +15,26 @@
  *= require_self
  */
 
- /* Custom styles for navbar */
+ /* Styles for navbar */
 .navbar {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* This adds a shadow to the navbar */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Style for navbar-brand links on hover */
 .navbar-brand:hover {
-  color: #0056b3; /* Change the text color on hover */
-  background-color: #e8f4fd; /* Change the background color on hover */
-  border-radius: .25rem; /* Optional: adds rounded corners */
+  color: #0056b3;
+  background-color: #e8f4fd;
+  border-radius: .25rem;
 }
 
-/* Style for the logout button */
+/* Logout button */
 .btn-danger {
-  transition: background-color 0.3s ease; /* Smooth transition for background color */
+  transition: background-color 0.3s ease;
 }
 
-/* Style for the logout button on hover */
 .btn-danger:hover {
-  background-color: #c82333; /* A darker shade of red for the hover state */
+  background-color: #c82333;
 }
 
-/* This is required to override Bootstrap's default hover state color for buttons */
 .btn-danger:not(:disabled):not(.disabled).active, 
 .btn-danger:not(:disabled):not(.disabled):active, 
 .show>.btn-danger.dropdown-toggle {
@@ -55,56 +52,55 @@
 
 /* Overall form styling */
 form {
-  max-width: 400px; /* Adjust the width of the form */
-  margin: auto; /* Center the form on the page */
-  padding: 20px; /* Add some padding inside the form */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Adds a subtle shadow around the form */
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Style for form controls */
 .form-control {
-  width: 100%; /* Make form controls take up 100% of the form's width */
-  padding: 10px; /* Add some padding inside each form control */
-  margin-bottom: 20px; /* Add some space between form controls */
-  border: 1px solid #ccc; /* Add a border to each form control */
-  border-radius: 5px; /* Optional: Rounds the corners of the form controls */
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
 /* Style for labels */
 label {
-  display: block; /* Make labels take up their own line */
-  margin-bottom: 5px; /* Add some space below each label */
+  display: block;
+  margin-bottom: 5px;
 }
 
 /* Style for the submit button */
 .btn-primary {
-  background-color: #007bff; /* Primary button color */
-  color: white; /* Text color for primary button */
-  padding: 10px 15px; /* Padding inside the button */
-  border: none; /* Remove border */
-  border-radius: 5px; /* Round the corners of the button */
-  cursor: pointer; /* Change cursor to pointer when hovering over the button */
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 .btn-primary:hover {
-  background-color: #0056b3; /* Darken the button color on hover */
+  background-color: #0056b3;
 }
 
 /* Style for displaying validation errors */
 .form-errors {
-  color: red; /* Text color for validation errors */
-  margin-bottom: 20px; /* Add some space below the error messages */
+  color: red;
+  margin-bottom: 20px;
 }
 
-/* Optional: Style for the placeholder */
+/* Style for the placeholder */
 ::placeholder {
-  color: #bbb; /* Change the color of the placeholder text */
+  color: #bbb;
 }
 
 .custom-flash-message {
   color: red;
-  margin-bottom: 20px; /* Example custom margin */
-  /* Add any other custom styles here */
+  margin-bottom: 20px;
 }
 
 

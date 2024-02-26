@@ -4,7 +4,7 @@ class TasksController < ApplicationController
   
     # GET /categories/:category_id/tasks
     def index
-      @tasks = @category.tasks.order(deadline_date: :desc, deadline_time: :desc)
+      @tasks = @category.tasks.order(deadline_date: :asc, deadline_time: :asc)
     end    
   
     # GET /categories/:category_id/tasks/new

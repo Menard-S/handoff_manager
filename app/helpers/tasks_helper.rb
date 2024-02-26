@@ -12,10 +12,10 @@ module TasksHelper
         total = task.word_counts.sum do |key, count|
           rate = task.category.pricing[key].to_f
           amount = count.to_f * rate
-          puts "#{key}: #{count} * #{rate} = #{amount}" # Corrected debugging statement
+          puts "#{key}: #{count} * #{rate} = #{amount}"
           amount
         end
-        puts "Total: #{total}" # For debugging
+        puts "Total: #{total}"
         total.round(2)
       
       else

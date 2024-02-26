@@ -1,9 +1,9 @@
 .btn-delete {
-    background-color: #fbe9e7; /* light red background */
-    color: #d9534f; /* bootstrap's btn-danger color */
+    background-color: #fbe9e7;
+    color: #d9534f;
   }
   .btn-delete:hover {
-    color: #fff; /* white text on hover */
-    background-color: #d9534f; /* darker red background on hover */
+    color: #fff;
+    background-color: #d9534f;
   }
   

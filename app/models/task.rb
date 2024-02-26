@@ -11,7 +11,8 @@ class Task < ApplicationRecord
   validates :deadline_date, presence: true
   validates :deadline_time, presence: true
 
-  validate :deadline_date_cannot_be_in_the_past
+  validate :deadline_date_cannot_be_in_the_past,
+            unless: -> { only_completed_status_being_updated? }
   validate :deadline_time_cannot_be_in_the_past, if: -> { deadline_date.present? && deadline_time.present? },
             unless: -> { only_completed_status_being_updated? }
   

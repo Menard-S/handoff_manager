@@ -10,5 +10,16 @@ class DashboardService
           .where(deadline_date: @start_date..@end_date)
           .order(deadline_date: :asc, deadline_time: :asc)
     end
+    def count_completed
+      Task.joins(:category)
+          .where(completed: true)
+          .where(deadline_date: @start_date..@end_date)
+          .count
+    end
+    def tasks_count
+      Task.joins(:category)
+          .where(deadline_date: @start_date..@end_date)
+          .count
+    end
   end
   

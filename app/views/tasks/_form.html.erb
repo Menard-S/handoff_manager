@@ -13,8 +13,8 @@
   
   <%= form_with(model: [ @category, @task ], local: true, data: { turbo: false }) do |form| %>
       <% if @task.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@task.errors.count, "error") %> prohibited this object from being saved:</h2>
+        <div id="error_explanation" class="form-errors">
+          <h2><%= pluralize(@task.errors.count, "error") %> prohibited this action:</h2>
           <ul>
             <% @task.errors.full_messages.each do |message| %>
               <li><%= message %></li>
@@ -62,8 +62,11 @@
         <% end %>
 
 
-      <div class="actions">
+      <div class="actions d-flex justify-content-center align-items-center">
         <%= form.submit %>
+      </div>
+        <div style="margin-top: 0px;">
+        <%= link_to 'Back', category_tasks_path(@category) %>
       </div>
   <% end %>
 

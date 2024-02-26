@@ -40,26 +40,21 @@
     background-color: #ffc107;
   }
   
-  /* .btn-delete {
-    background-color: #dc3545;
-  } */
   
   .fa-icon {
     margin-right: 8px;
   }
   
-  /* Hover style for edit button */
+
 .btn-edit:hover {
-    background-color: #4CAF50; /* Green background for hover state */
-    /* You can add other styles here, like changing the border or adding a box-shadow */
+    background-color: #4CAF50;
   }
   
 .btn-edit:hover {
-    background-color: #4CAF50; /* Green background for hover state */
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* Horizontal offset, vertical offset, blur radius, spread radius, color */
+    background-color: #4CAF50;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); 
   }
   
-  /* Hover style for delete button with shadow */
 
 .btn-delete:hover {
     background-color: #F44336; 
@@ -67,51 +62,51 @@
   }
   
 .fa-icon:hover {
-    color: #dddddd; /* Lighter color on hover */
+    color: #dddddd;
   }
 
   /* Show styling */
 
   .category-show-container ul {
-    list-style-type: none; /* Removes bullet points */
-    padding-left: 0; /* Removes the default padding */
+    list-style-type: none;
+    padding-left: 0;
   }
   
   .category-show-container .btn-view-tasks {
-    white-space: nowrap; /* Prevents wrapping to a new line */
+    white-space: nowrap;
   }
   
 
 .category-show-container {
-  text-align: center; /* Center align text */
-  max-width: 600px; /* Or any other max-width or width you prefer */
-  margin: 0 auto; /* Center the container */
-  padding: 20px; /* Add some padding around the content */
-  border: 1px solid #ddd; /* Optional border */
-  border-radius: 8px; /* Rounded corners */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for an embossed effect */
-  background: #fff; /* Background color */
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: #fff;
 }
 
 .category-show-container h1, .category-show-container p {
-  margin-bottom: 20px; /* Space out the elements */
+  margin-bottom: 20px;
 }
 
 .category-show-container .btn {
-  margin-top: 10px; /* Space out buttons from the text */
-  display: inline-block; /* Display buttons inline */
+  margin-top: 10px;
+  display: inline-block;
 }
 
 .btn-back {
-    background-color: #007bff; /* You can choose a color that fits your back button */
+    background-color: #007bff;
   }
 
 .btn-new-task {
-    background-color: #28a745; /* You can choose a color that fits your add new task button */
+    background-color: #28a745;
   }
 
 .fa-edit-header {
-    color: #ffc107; /* Example yellow color for the edit icon */
+    color: #ffc107;
   }
   
   
