@@ -80,6 +80,11 @@ test:
 production:
   <<: *default
   url: <%= ENV['DATABASE_URL'] %>
+  host: 127.0.0.1 # or your specific database server address
+  port: 5432
+  database: handoff_manager_production
+  username: msegfilph
+  password: 12345
   # database: handoff_manager_production
   # username: handoff_manager
   # password: <%= ENV["HANDOFF_MANAGER_DATABASE_PASSWORD"] %>
