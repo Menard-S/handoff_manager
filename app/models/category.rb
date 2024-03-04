@@ -8,8 +8,13 @@ class Category < ApplicationRecord
                                                           message: "%{value} is not a valid billing unit" }
     
     validate :pricing_structure
+    before_validation :initialize_pricing
   
     private
+    
+    def initialize_pricing
+      self.pricing ||= {}
+    end
   
     def pricing_structure
       errors.add(:pricing, "must be a hash") unless pricing.is_a?(Hash)

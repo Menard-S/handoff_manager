@@ -9,6 +9,7 @@ class CategoriesController < ApplicationController
     # GET /categories/new
     def new
       @category = Category.new
+      @category.pricing = { 'hourly_rate' => 0, 'new_word' => 0, 'fuzzy_75_84' => 0, 'fuzzy_85_94' => 0, 'fuzzy_95_99' => 0, 'leveraged_match' => 0 }
     end
   
     # POST /categories
