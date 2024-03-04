@@ -45,19 +45,19 @@
         <% elsif @category.billing_unit == 'WORDS' %>
           <div id="words_quantity">
             <%= form.label :word_counts_new_word, "New Word Words" %>
-            <%= number_field_tag 'task[word_counts][new_word]', nil, step: :any, value: 0, id: :task_word_counts_new_word, class: 'form-control' %>
+            <%= number_field_tag 'task[word_counts][new_word]', @task.word_counts['new_word'] || 0, step: :any, id: :task_word_counts_new_word, class: 'form-control' %>
 
             <%= form.label :word_counts_fuzzy_75_84, "75-84% Match Words" %>
-            <%= number_field_tag 'task[word_counts][fuzzy_75_84]', nil, step: :any, value: 0, id: :task_word_counts_fuzzy_75_84, class: 'form-control' %>
+            <%= number_field_tag 'task[word_counts][fuzzy_75_84]', @task.word_counts['fuzzy_75_84'] || 0, step: :any, id: :task_word_counts_fuzzy_75_84, class: 'form-control' %>
 
             <%= form.label :word_counts_fuzzy_85_94, "85-94% Match Words" %>
-            <%= number_field_tag 'task[word_counts][fuzzy_85_94]', nil, step: :any, value: 0, id: :task_word_counts_fuzzy_85_94, class: 'form-control' %>
+            <%= number_field_tag 'task[word_counts][fuzzy_85_94]', @task.word_counts['fuzzy_85_94'] || 0, step: :any, id: :task_word_counts_fuzzy_85_94, class: 'form-control' %>
 
             <%= form.label :word_counts_fuzzy_95_99, "95-99% Match Words" %>
-            <%= number_field_tag 'task[word_counts][fuzzy_95_99]', nil, step: :any, value: 0, id: :task_word_counts_fuzzy_95_99, class: 'form-control' %>
+            <%= number_field_tag 'task[word_counts][fuzzy_95_99]', @task.word_counts['fuzzy_95_99'] || 0, step: :any, id: :task_word_counts_fuzzy_95_99, class: 'form-control' %>
 
             <%= form.label :word_counts_leveraged_match, "Leveraged Match Words" %>
-            <%= number_field_tag 'task[word_counts][leveraged_match]', nil, step: :any, value: 0, id: :task_word_counts_leveraged_match, class: 'form-control' %>
+            <%= number_field_tag 'task[word_counts][leveraged_match]', @task.word_counts['leveraged_match'] || 0, step: :any, id: :task_word_counts_leveraged_match, class: 'form-control' %>
           </div>
         <% end %>
 

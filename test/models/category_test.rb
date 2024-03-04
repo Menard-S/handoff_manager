@@ -28,7 +28,8 @@ class CategoryTest < ActiveSupport::TestCase
   end
 
   test 'should save valid category' do
-    category = Category.new(name: 'Testing', billing_unit: 'WORDS', pricing: {})
+    user = users(:one)
+    category = Category.new(name: 'Testing', billing_unit: 'WORDS', pricing: {}, user: user)
     assert category.save, 'Failed to save the valid category'
   end
 end

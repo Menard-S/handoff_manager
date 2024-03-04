@@ -83,7 +83,7 @@ class TasksController < ApplicationController
     end
   
     def set_category
-      @category = Category.find(params[:category_id])
+      @category = @user.categories.find(params[:category_id])
     end
   
     def set_task

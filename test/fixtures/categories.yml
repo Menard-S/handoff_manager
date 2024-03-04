@@ -4,8 +4,10 @@ hours_category:
   name: Category with Hours
   billing_unit: HOURS
   pricing: {}
+  user: one
 
 words_category:
   name: Category with Words
   billing_unit: WORDS
   pricing: {}
+  user: one

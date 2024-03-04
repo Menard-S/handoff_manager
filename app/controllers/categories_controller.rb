@@ -3,7 +3,7 @@ class CategoriesController < ApplicationController
   
     # GET /categories
     def index
-      @categories = Category.order(:name)
+      @categories = @user.categories.order(:name)
     end
   
     # GET /categories/new
@@ -13,7 +13,7 @@ class CategoriesController < ApplicationController
   
     # POST /categories
     def create
-      @category = Category.new(category_params)
+      @category = @user.categories.build(category_params)
       if @category.save
         redirect_to @category, notice: 'Category was successfully created.'
       else
@@ -58,7 +58,7 @@ class CategoriesController < ApplicationController
   
     # Use callbacks to share common setup or constraints between actions
     def set_category
-      @category = Category.find(params[:id])
+      @category = @user.categories.find(params[:id])
     end
   
     # Only allow a list of trusted parameters through
