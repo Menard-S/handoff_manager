@@ -1,11 +1,11 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  billing_unit: MyString
-  pricing: 
+hours_category:
+  name: Category with Hours
+  billing_unit: HOURS
+  pricing: {}
 
-two:
-  name: MyString
-  billing_unit: MyString
-  pricing: 
+words_category:
+  name: Category with Words
+  billing_unit: WORDS
+  pricing: {}

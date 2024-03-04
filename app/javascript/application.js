@@ -37,7 +37,7 @@ document.addEventListener('turbo:load', (event) => {
     console.log(searchBarInput);
     if (searchBarInput) {
       searchBarInput.addEventListener('keyup', function () {
-        console.log('Search functionality is active'); // To confirm the listener is attached
+        console.log('Search functionality is active');
         const query = this.value.toLowerCase();
         const rows = document.querySelectorAll("table tbody tr");
         rows.forEach(function (row) {

@@ -27,7 +27,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "email should be unique" do
-    user1 = users(:one) # assuming you have a users fixture
+    user1 = users(:one)
     user2 = User.new(email: user1.email, password: 'Complex@1234')
     assert_not user2.save, "Saved a user with a duplicate email"
   end

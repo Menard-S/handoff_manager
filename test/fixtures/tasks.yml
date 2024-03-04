@@ -1,17 +1,17 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  deadline_date: 2024-02-23
-  deadline_time: 2024-02-23 18:55:07
-  hours: 9.99
-  word_count: 
-  category: one
+task_with_hours:
+  name: Task with Hours
+  deadline_date: <%= Date.current + 1.day %>
+  deadline_time: <%= Time.current + 2.hours %>
+  hours: 10
+  word_counts: {}
+  category: hours_category
 
-two:
-  name: MyString
-  deadline_date: 2024-02-23
-  deadline_time: 2024-02-23 18:55:07
-  hours: 9.99
-  word_count: 
-  category: two
+task_with_words:
+  name: Task with Words
+  deadline_date: <%= Date.current + 1.day %>
+  deadline_time: <%= Time.current + 2.hours %>
+  hours: nil
+  word_counts: { section1: 1000, section2: 1500 }
+  category: words_category

@@ -23,7 +23,6 @@ class Task < ApplicationRecord
 
   with_options if: -> { category.billing_unit == 'WORDS' } do |task|
     task.validates :word_counts, presence: true
-    # Here you might validate the structure of word_count if it's a JSON
     # Similar to the pricing_structure validation in Category
   end
   
