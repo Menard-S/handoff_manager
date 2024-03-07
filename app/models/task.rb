@@ -3,11 +3,8 @@ class Task < ApplicationRecord
   delegate :name, to: :category, prefix: true, allow_nil: true
   delegate :billing_unit, to: :category, allow_nil: true
 
-  
-  # Ensure that the name is present
   validates :name, presence: true
   
-  # Validate presence of deadline_date and deadline_time
   validates :deadline_date, presence: true
   validates :deadline_time, presence: true
 
@@ -16,14 +13,12 @@ class Task < ApplicationRecord
   validate :deadline_time_cannot_be_in_the_past, if: -> { deadline_date.present? && deadline_time.present? },
             unless: -> { only_completed_status_being_updated? }
   
-  # Conditional validations based on the associated category's billing unit
   with_options if: -> { category.billing_unit == 'HOURS' } do |task|
     task.validates :hours, presence: true, numericality: { greater_than: 0 }
   end
 
   with_options if: -> { category.billing_unit == 'WORDS' } do |task|
     task.validates :word_counts, presence: true
-    # Similar to the pricing_structure validation in Category
   end
   
   def word_counts_presence_and_structure
@@ -32,10 +27,7 @@ class Task < ApplicationRecord
     end
   end
 
-  # Scope to get completed tasks
   scope :completed, -> { where(completed: true) }
-
-  # Scope to get incomplete tasks
   scope :incomplete, -> { where(completed: [nil, false]) }
   
   private

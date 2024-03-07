@@ -16,7 +16,7 @@ class CategoriesController < ApplicationController
     def create
       @category = @user.categories.build(category_params)
       if @category.save
-        redirect_to @category, notice: 'Category was successfully created.'
+        redirect_to @category, notice: 'Cost code was successfully created.'
       else
         render :new
       end
@@ -33,7 +33,7 @@ class CategoriesController < ApplicationController
     # PATCH/PUT /categories/:id
     def update
       if @category.update(category_params)
-        redirect_to @category, notice: 'Category was successfully updated.'
+        redirect_to @category, notice: 'Cost code was successfully updated.'
       else
         render :edit
       end
@@ -45,11 +45,11 @@ class CategoriesController < ApplicationController
       
       # Check if the category has any associated tasks
       if @category.tasks.any?
-        message = "This category has pending task(s). Empty the category first!"
+        message = "This cost code has pending task(s). Empty the cost code first!"
         redirect_to categories_path, alert: message
       else
         @category.destroy
-        redirect_to categories_path, notice: 'Category was successfully deleted.'
+        redirect_to categories_path, notice: 'Cost code was successfully deleted.'
       end
     end
     
@@ -57,12 +57,10 @@ class CategoriesController < ApplicationController
   
     private
   
-    # Use callbacks to share common setup or constraints between actions
     def set_category
       @category = @user.categories.find(params[:id])
     end
   
-    # Only allow a list of trusted parameters through
     def category_params
         # Start with the base permitted parameters
         permitted_params = params.require(:category).permit(:name, :billing_unit)

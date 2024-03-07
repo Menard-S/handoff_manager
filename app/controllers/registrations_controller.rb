@@ -10,7 +10,6 @@ class RegistrationsController < ApplicationController
             session[:user_id] = @user.id
           redirect_to dashboard_path, notice: "User created successfully."
         else
-          # Respond to Turbo Stream requests
           respond_to do |format|
             format.html { render :new, status: :unprocessable_entity }
             format.turbo_stream do

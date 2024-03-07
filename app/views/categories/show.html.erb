@@ -1,6 +1,6 @@
 <div class="category-show-container">
   <h1>
-    Category: <%= @category.name %>
+    Cost Code: <%= @category.name %>
     <%= link_to edit_category_path(@category), class: 'fa-icon fa-edit-header' do %>
       <i class="fas fa-edit"></i>
     <% end %>
@@ -22,7 +22,7 @@
 
 <div>
 <%= link_to categories_path, class: 'btn btn-back', onmouseover: "this.style.boxShadow='0 2px 4px #666';", onmouseout: "this.style.boxShadow='none';" do %>
-  <i class="fas fa-arrow-left" style="color: #007bff;"></i> Back to all categories
+  <i class="fas fa-arrow-left" style="color: #007bff;"></i> Back to all cost codes
 <% end %>
 <%= link_to new_category_task_path(@category), class: 'btn btn-new-task', onmouseover: "this.style.boxShadow='0 2px 4px #666';", onmouseout: "this.style.boxShadow='none';" do %>
   <i class="fas fa-plus" style="color: #28a745;"></i> Add New Task

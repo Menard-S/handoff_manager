@@ -38,9 +38,10 @@
     <%= form.number_field :leveraged_match, name: 'leveraged_match', step: :any, value: @category.pricing['leveraged_match'] || 0 %>
   </div>
 
-  <div class="actions d-flex justify-content-center align-items-center">
-    <%= form.submit %>
-  </div>
+<div class="actions d-flex justify-content-center align-items-center">
+  <%= form.submit form.object.new_record? ? 'Create Cost Code' : 'Update Cost Code' %>
+</div>
+
 
   <%= link_to 'Back', categories_path %>
 <% end %>

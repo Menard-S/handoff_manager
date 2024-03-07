@@ -3,7 +3,7 @@
     <div>
       Welcome to your dashboard, <strong><%= @user.email %></strong>!<br>
       You completed <strong><%= (@completed_tasks_count) %></strong>
-      out of <strong><%= pluralize(@total_tasks_count, 'task') %></strong> in <strong><%= pluralize(@categories.count, 'category') %></strong>.
+      out of <strong><%= pluralize(@total_tasks_count, 'task') %></strong> in <strong><%= pluralize(@categories.count, 'cost code') %></strong>.
     </div>
   <% end %>
 
@@ -36,7 +36,7 @@
       <th>Task Name</th>
       <th>Deadline Date</th>
       <th>Deadline Time</th>
-      <th>Category Name</th>
+      <th>Cost Code</th>
       <th>Billing Unit</th>
       <th>Price</th>
       <th>Actions</th>

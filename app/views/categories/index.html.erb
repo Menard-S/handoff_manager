@@ -1,4 +1,4 @@
-<h1>Categories</h1>
+<h1>Cost Codes</h1>
 
 <div class="card-container">
   <% @categories.each do |category| %>
@@ -9,7 +9,7 @@
         <%= link_to edit_category_path(category), class: 'btn btn-edit' do %>
           <i class="fas fa-edit fa-icon" style="color: green;"></i>
         <% end %>
-      <%= button_to category_path(category), method: :delete, class: 'btn btn-delete', data: { confirm: 'Are you sure you want to delete this category?', turbo: true } do %>
+      <%= button_to category_path(category), method: :delete, class: 'btn btn-delete', data: { confirm: 'Are you sure you want to delete this cost code?', turbo: true } do %>
         <i class="fa fa-trash" style="color: red;"></i>
       <% end %>
 
@@ -23,6 +23,6 @@
 <% end %>
 
 <%= link_to new_category_path, class: 'btn btn-primary' do %>
-  <i class="fas fa-plus"></i> New Category
+  <i class="fas fa-plus"></i> New Cost Code
 <% end %>
 
