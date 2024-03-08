@@ -20,16 +20,16 @@
     </ul>
   </p>
 
-<div>
-<%= link_to categories_path, class: 'btn btn-back', onmouseover: "this.style.boxShadow='0 2px 4px #666';", onmouseout: "this.style.boxShadow='none';" do %>
-  <i class="fas fa-arrow-left" style="color: #007bff;"></i> Back to all cost codes
-<% end %>
-<%= link_to new_category_task_path(@category), class: 'btn btn-new-task', onmouseover: "this.style.boxShadow='0 2px 4px #666';", onmouseout: "this.style.boxShadow='none';" do %>
-  <i class="fas fa-plus" style="color: #28a745;"></i> Add New Task
-<% end %>
-<%= link_to category_tasks_path(@category), class: 'btn btn-view-tasks', onmouseover: "this.style.boxShadow='0 2px 4px #666';", onmouseout: "this.style.boxShadow='none';" do %>
-  <i class="fas fa-arrow-right" style="color: #007bff;"></i> View all tasks in <%= @category.name %>
-<% end %>
+  <div>
+  <%= link_to categories_path, class: 'btn btn-back', onmouseover: "this.style.boxShadow='0 2px 4px #666';", onmouseout: "this.style.boxShadow='none';" do %>
+    <i class="fas fa-arrow-left" style="color: #007bff;"></i> Back to all cost codes
+  <% end %>
+  <%= link_to new_category_task_path(@category), class: 'btn btn-new-task', onmouseover: "this.style.boxShadow='0 2px 4px #666';", onmouseout: "this.style.boxShadow='none';" do %>
+    <i class="fas fa-plus" style="color: #28a745;"></i> Add New Task
+  <% end %>
+  <%= link_to category_tasks_path(@category), class: 'btn btn-view-tasks', onmouseover: "this.style.boxShadow='0 2px 4px #666';", onmouseout: "this.style.boxShadow='none';" do %>
+    <i class="fas fa-arrow-right" style="color: #007bff;"></i> View all tasks in <%= @category.name %>
+  <% end %>
 
 
 </div>

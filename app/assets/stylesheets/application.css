@@ -11,12 +11,13 @@
  * It is generally better to create a new file per style scope.
  *
  *= require dashboard
+ *= require welcome
  *= require_tree .
  *= require_self
  */
 
  /* Styles for navbar */
-.navbar {
+ .navbar {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 

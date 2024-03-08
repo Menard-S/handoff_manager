@@ -11,7 +11,7 @@
          data-leveraged-match-rate="<%= pricing_data['leveraged_match'] %>"
      <% end %>>
   
-  <%= form_with(model: [ @category, @task ], local: true, data: { turbo: false }) do |form| %>
+  <%= form_with(model: [ @category, @task ], local: true, data: { turbo: false }, class: 'form-background') do |form| %>
       <% if @task.errors.any? %>
         <div id="error_explanation" class="form-errors">
           <h2><%= pluralize(@task.errors.count, "error") %> prohibited this action:</h2>

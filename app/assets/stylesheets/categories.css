@@ -7,7 +7,7 @@
     justify-content: center;
   }
   
-  .card {
+.card {
     border: 1px solid #ddd;
     border-radius: 8px;
     width: calc(33.333% - 16px); /* Three cards per row with 16px gap */
@@ -16,18 +16,18 @@
     background: white;
   }
   
-  .card h2 {
+.card h2 {
     font-size: 1.5em;
     margin-bottom: 8px;
   }
   
-  .card-actions {
+.card-actions {
     margin-top: 16px;
     display: flex;
     justify-content: space-between;
   }
   
-  .btn {
+.btn {
     padding: 8px 16px;
     text-decoration: none;
     color: rgb(254, 254, 254);
@@ -36,12 +36,12 @@
     cursor: pointer;
   }
   
-  .btn-edit {
+.btn-edit {
     background-color: #ffc107;
   }
   
   
-  .fa-icon {
+.fa-icon {
     margin-right: 8px;
   }
   
@@ -67,12 +67,12 @@
 
   /* Show styling */
 
-  .category-show-container ul {
+.category-show-container ul {
     list-style-type: none;
     padding-left: 0;
   }
   
-  .category-show-container .btn-view-tasks {
+.category-show-container .btn-view-tasks {
     white-space: nowrap;
   }
   
@@ -87,6 +87,8 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   background: #fff;
 }
+
+
 
 .category-show-container h1, .category-show-container p {
   margin-bottom: 20px;

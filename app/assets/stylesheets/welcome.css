@@ -1,0 +1,28 @@
+.form-background {
+    position: relative;
+    background-image: url('HO_welcome.png');
+    background-size: cover;
+    background-position: center;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,.1);
+    color: #000000;
+  }
+  
+  .form-background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.866);
+    border-radius: 8px;
+    z-index: 0;
+  }
+  
+  .form-background * {
+    position: relative;
+    z-index: 1;
+  }
+  

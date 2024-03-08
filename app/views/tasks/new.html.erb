@@ -1,7 +1,3 @@
 <h1>New Task for <%= @category.name %></h1>
 
 <%= render 'form' %>
-
-<div style="margin-top: 0px;">
-  <%= link_to 'Back to Tasks', category_tasks_path(@category), class: "btn btn-secondary" %>
-</div>
