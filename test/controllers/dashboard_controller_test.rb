@@ -1,7 +1,7 @@
 class DashboardControllerTest < ActionDispatch::IntegrationTest
     setup do
       @user = users(:one)
-      post sign_in_url, params: { email: @user.email, password: 'test_password' }
+      sign_in @user
     end
   
     test "should get index" do

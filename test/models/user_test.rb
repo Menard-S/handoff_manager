@@ -12,12 +12,12 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "should not save user with short password" do
-    user = User.new(email: 'test@example.com', password: 'Short1!')
+    user = User.new(email: 'test@example.com', password: 'x', password_confirmation: 'x')
     assert_not user.save, "Saved the user with a short password"
   end
 
   test "should not save user with password that doesn't meet complexity requirements" do
-    user = User.new(email: 'test@example.com', password: 'alllowercase1')
+    user = User.new(email: 'test@example.com', password: 'wpd', password_confirmation: 'wpd')
     assert_not user.save, "Saved the user with a password that doesn't meet complexity requirements"
   end
 

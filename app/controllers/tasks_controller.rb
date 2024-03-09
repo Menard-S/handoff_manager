@@ -1,6 +1,7 @@
 class TasksController < ApplicationController
-    before_action :set_category
-    before_action :set_task, except: [:new, :create, :index]
+  before_action :authenticate_user!
+  before_action :set_category
+  before_action :set_task, except: [:new, :create, :index]
   
     def index
       @tasks = @category.tasks.order(deadline_date: :asc, deadline_time: :asc)
@@ -72,7 +73,7 @@ class TasksController < ApplicationController
     end
   
     def set_category
-      @category = @user.categories.find(params[:category_id])
+      @category = current_user.categories.find(params[:category_id])
     end
   
     def set_task

@@ -1,22 +1,19 @@
 class ApplicationController < ActionController::Base
-  helper_method :current_user
+
   helper :tasks
-  before_action :set_current_user
-  before_action :require_user
 
-  private
+  protect_from_forgery with: :exception
 
-  def set_current_user
-    @user = User.find_by(id: session[:user_id]) if session[:user_id]
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
+  def after_sign_in_path_for(resource)
+    dashboard_path
   end
-  
-  def current_user
-    @user
-  end
-  
-  def require_user
-    unless @user
-      redirect_to sign_in_path, alert: 'You must be signed in to access this page.'
-    end
+
+  protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:username])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:username])
   end
 end

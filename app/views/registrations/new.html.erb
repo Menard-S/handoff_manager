@@ -5,7 +5,7 @@
     </div>
 
 <div class="col-md-6">
-  <%= form_with model: @user, url: sign_up_path, html: { class: 'form-background' } do |form| %>
+  <%= form_with model: @user, url: new_user_registration_path, html: { class: 'form-background' } do |form| %>
     <%= render partial: "layouts/form_errors", locals: { object: @user } %>
     <h1 class="text-center">
       Sign up
@@ -28,7 +28,7 @@
     </div>
     
     <div class="mt-3">
-      Already have an account? <%= link_to 'Sign in', sign_in_path, class: "text-primary" %>
+      Already have an account? <%= link_to 'Sign in', new_user_session_path, class: "text-primary" %>
     </div>
   <% end %>
 </div>

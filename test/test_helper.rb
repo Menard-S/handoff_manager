@@ -6,5 +6,6 @@ module ActiveSupport
   class TestCase
     parallelize(workers: :number_of_processors)
     fixtures :all
+    include Devise::Test::IntegrationHelpers
   end
 end

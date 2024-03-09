@@ -1,7 +1,7 @@
 one:
   email: user@example.com
-  password_digest: <%= BCrypt::Password.create('test_password') %>
+  encrypted_password: '$2a$12$xnpneiJV0/er/aTfVzgBAu9ToA5c7J.W9t1jVsDLMKYy1nQYrUyQO'
 
 two:
   email: anotheruser@example.com
-  password_digest: <%= BCrypt::Password.create('another_password') %>
+  encrypted_password: '$2a$12$dWE063OQO58hbq58enpCDebfKCR/t/rn2UVdgG50Nyu4RQZv0zIQi'

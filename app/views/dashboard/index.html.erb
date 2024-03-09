@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-between align-items-center py-2">
-  <% if @user %>
+  <% if user_signed_in? %>
     <div>
-      Welcome to your dashboard, <strong><%= @user.email %></strong>!<br>
+      Welcome to your dashboard, <strong><%= current_user.email %></strong>!<br>
       You completed <strong><%= (@completed_tasks_count) %></strong>
       out of <strong><%= pluralize(@total_tasks_count, 'task') %></strong> in <strong><%= pluralize(@categories.count, 'cost code') %></strong>.
     </div>

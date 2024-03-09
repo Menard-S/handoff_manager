@@ -1,4 +1,6 @@
 class DashboardController < ApplicationController
+  before_action :authenticate_user!
+  
   def index
     @user = current_user
     service = DashboardService.new(params[:start_date], params[:end_date], @user)
