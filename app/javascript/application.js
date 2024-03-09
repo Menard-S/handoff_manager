@@ -1,12 +1,10 @@
 // Configure your import map in config/importmap.rb. Read more: https://github.com/rails/importmap-rails
 import "@hotwired/turbo-rails"
 import "controllers"
-// import 'bootstrap';
 
 document.addEventListener("turbo:load", function() {
   console.log('Page has loaded via Turbo');
 
-  // Your existing code for toggling pricing fields
   var billingUnitSelect = document.getElementById('category_billing_unit');
   var hoursPricingDiv = document.getElementById('hours_pricing');
   var wordsPricingDiv = document.getElementById('words_pricing');
