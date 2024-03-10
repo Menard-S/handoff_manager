@@ -13,5 +13,10 @@ task_with_words:
   deadline_date: <%= Date.current + 1.day %>
   deadline_time: <%= Time.current + 2.hours %>
   hours: nil
-  word_counts: { section1: 1000, section2: 1500 }
+  word_counts:
+    new_word: 1000
+    fuzzy_75_84: 200
+    fuzzy_85_94: 300
+    fuzzy_95_99: 400
+    leveraged_match: 500
   category: words_category

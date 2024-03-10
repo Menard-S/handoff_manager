@@ -8,11 +8,12 @@ class ApplicationSystemTestCase < ActionDispatch::SystemTestCase
     driver_options.add_argument('disable-gpu')
   end
 
-  def sign_in_as(user_fixture)
-    visit signin_url
+  def sign_in_as(fixture_name)
+    user = users(fixture_name)
+    visit new_user_session_path
     fill_in 'Email', with: user.email
     fill_in 'Password', with: 'test_password'
-    click_on 'Log in'
+    click_on 'Get started'
   end
 
 end

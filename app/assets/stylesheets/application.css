@@ -94,6 +94,14 @@ label {
   margin-bottom: 20px;
 }
 
+#error_explanation {
+  color: red; 
+}
+
+#error_explanation ul li {
+  color: red;
+}
+
 /* Style for the placeholder */
 ::placeholder {
   color: #bbb;
